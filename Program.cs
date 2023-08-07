@@ -1,23 +1,38 @@
-﻿// Задача 1: Напишите программу, которая принимает на вход трёхзначное
-число и на выходе показывает вторую цифру этого числа.
-// 456 -> 5
-// 782 -> 8
-// 918 -> 1
-int Promt (string message)
+﻿// Задача 2: Напишите программу, которая выводит третью цифру заданного
+// числа или сообщает, что третьей цифры нет.
+// 645 -> 5
+// 78 -> третьей цифры нет
+// 32679 -> 6
+
+int Prompt(string message)
 {
-    System.Console.Write(message) ;
-    string value = Console.ReadLine () ;
-    int result = Convert.ToInt32 (value) ;
-    return result ;
+    Console.Write(message) ;
+    string value = Console.Readline () ;
+    int result = Convert.ToInt32(value);
+    return result;
 }
 
-int number = Promt ("Введите трехзначное число > ") ;
-if (number < 100 || number >= 1000)
+int GetThirdRank(int number)
 {
-    Console.WriteLine ("Вы ввели не трехзначное число, пожалуйста повторите
-ввод ") ;
-    return ;
+    while (number > 999)
+    {
+        number /=10;
+    }
+    return number % 10;
 }
-Console.WriteLine ($"Введеное число ' {number}'") ;
-int secondRank = number / 10 % 10;
-Console.WriteLine ($"Вторая цифра '{secondRank}'") ;
+
+bool ValidateNumber(int number)
+{
+    if (number < 100)
+    {
+        Console.WriteLine('Третьей цифры нет') ;
+        return false;
+    } 
+    return true;
+}
+
+int number = Prompt ("Введите число > ") ;
+if (ValidateNumber(number))
+{
+    Console.WriteLine(GetThirdRank(number)) ;
+}
